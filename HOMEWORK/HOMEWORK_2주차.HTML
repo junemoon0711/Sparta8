@@ -1,0 +1,174 @@
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <title>상품 주문 페이지</title>
+</head>
+<style>
+    .PHOTO {
+        color: white;
+        width: 380px;
+        height: 270px;
+        background-position: center;
+        background-size: cover;
+        border: 1px solid black;
+        text-align: center;
+        padding-right: 40px;
+        padding-left: 40px;
+        margin: 40px
+    }
+
+    .wrap {
+        margin: 10px auto;
+        width: 500px;
+        font-size: 14px;
+    }
+
+    .wrap1 {
+        margin: 10px auto;
+        width: 500px;
+        font-size: 25px;
+    }
+
+    .largetext {
+        font - size: 3em;
+    }
+</style>
+
+<script>
+    function on_Order() {
+        let name = $("#user_name").val();
+        if (name == "") {
+            alert('이름을 입력하세요')
+            //주소창
+
+        } else if ($("#user_address").val() == "") {
+            alert('주소를 입력하세요')
+            //전화번호창  
+
+        } else if ($("#user_phone").val() == "") {
+            alert('전화번호를 입력하세요')
+            //수량
+
+        } else if ($("#user_qty option:selected").val() == "0") {
+            alert('수량을 선택하세요')
+            //그   
+        } else {
+            alert('주문이 완료 되었습니다')
+
+                ;
+        }
+    }
+
+
+    function set_exchange() {
+        $.ajax({
+            type: "GET",
+            url: "https://api.manana.kr/exchange/rate.json",
+            data: {},
+            success: function (response) {
+                for (let i = 0; i < response.length; i++) {
+                    if (response[i]['name'] == 'USDKRW=X') {
+                        $('#exchange').text(response[i]['rate']);
+                        return;
+                    }
+                }
+
+            }
+        })
+
+    }
+</script>
+
+
+
+
+<body>
+    <center>
+        <div>
+
+            <img class="PHOTO"
+                src="https://trudon.com//media/catalog/product/cache/2/image/9df78eab33525d08d6e5fb8d27136e95/b/a/base_01_spray_1600x1600_25_1_2.jpg">
+    </center>
+    </div>
+    <div class="wrap">
+        <span class="largetext">
+            향수판매 </span>가격: 150,000
+    </div>
+
+    <div class="wrap">
+        <li>원산지: 프랑스</li>
+        <li>탑 노트: 비터 오렌지, 실론 시나몬, 자몽, 탠저린</li>
+        <li>미들 노트: 카다멈, 차이니즈 오스만투스, 시나몬, 클로브, 오렌지</li>
+        <li>베이스 노트: 벤조인 레진, 버번 바닐라, 시트러스, 머스크, 미르</li>
+    </DIV>
+    <div class="wrap">달러-원 환율: <span id="exchange"></span></div>
+
+    <div class="wrap" "col-auto">
+
+        <div class="input-group mb-2">
+            <div class="input-group-prepend">
+                <div class="input-group-text"> 주문자이름</div>
+            </div><input id="user_name" type="text" class="form-control" id="inlineFormInputGroup">
+        </div>
+
+        <div class="input-group mb-2">
+            <div class="input-group-prepend">
+                <label class="input-group-text" for="inputGroupSelect01">수량</label>
+            </div>
+            <select class="custom-select" id="user_qty">
+                <option value="0" selected>--수량을 선택하세요--</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+            </select>
+        </div>
+
+        <div class="input-group mb-2">
+            <div class="input-group-prepend">
+                <div class="input-group-text">주소</div>
+            </div><input id="user_address" type="text" class="form-control" id="inlineFormInputGroup">
+        </div>
+
+        <div class="input-group mb-2">
+            <div class="input-group-prepend">
+                <div class="input-group-text">전화번호</div>
+            </div><input id="user_phone" type="text" class="form-control" id="inlineFormInputGroup">
+        </div>
+        </br>
+        <center>
+            <button onclick="on_Order()" class="btn btn-primary" type="submit">주문하기</button>
+        </center>
+    </div>
+
+
+
+
+
+
+
+
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+
+</body>
+
+</html>
